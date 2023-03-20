@@ -1,9 +1,20 @@
-.book-list {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, min(20rem, 100%));
-  grid-auto-rows: 35rem;
-  justify-content: center;
-  padding: 1rem 0 7vh 0;
-  gap: 1rem;
-  margin: auto;
+@import '@/styles/mixins';
+
+.book-list__container {
+  @include flex;
+  flex-direction: column;
+  .book-list {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, min(20rem, 100%));
+    grid-auto-rows: 35rem;
+    justify-content: center;
+    padding: 1rem 0 1rem 0;
+    gap: 1rem;
+    margin: auto;
+  }
+  .book-list__load {
+    width: 10rem;
+    margin: 1rem 0 2rem 0;
+  }
 }

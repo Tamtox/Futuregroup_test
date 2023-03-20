@@ -1,7 +1,18 @@
 import './Toolbar.scss';
 
 import React, { useReducer } from 'react';
-import { Box, Typography, TextField, FormControl, InputLabel, Select, MenuItem } from '@mui/material';
+import {
+  Box,
+  Typography,
+  TextField,
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
+  InputAdornment,
+  IconButton,
+} from '@mui/material';
+import { FaSearch } from 'react-icons/fa';
 
 interface ToolbarState {}
 
@@ -43,6 +54,20 @@ const Toolbar = (): JSX.Element => {
           fullWidth
           // value={}
           // onChange={}
+          InputProps={{
+            endAdornment: (
+              <InputAdornment position="end">
+                <IconButton
+                  color="inherit"
+                  onClick={() => {
+                    console.log(123);
+                  }}
+                >
+                  <FaSearch />
+                </IconButton>
+              </InputAdornment>
+            ),
+          }}
         />
         <FormControl className="toolbar__sort select" size="small">
           <InputLabel id="toolbar-sort-label">Sort</InputLabel>

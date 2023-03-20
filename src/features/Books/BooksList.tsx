@@ -1,14 +1,14 @@
 import './BookList.scss';
 
 import { Box } from '@mui/system';
-import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import { useState } from 'react';
 import type { RootState } from '@/store/store';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import Spinner from '@/components/elements/Spinner/Spinner';
 import { IBook } from '@/types/interfaces';
 import BookCard from './BookCard';
 import DetailedBook from './DetailedBook';
+import { Button } from '@mui/material';
 
 const BookList = (): JSX.Element => {
   const booksLoading = useSelector<RootState, boolean>((state) => state.bookSlice.booksLoading);
@@ -21,10 +21,15 @@ const BookList = (): JSX.Element => {
   const bookNode = detailedBook ? (
     <DetailedBook />
   ) : (
-    <Box className={`book-list`}>
-      {bookList.map((book: IBook) => {
-        return <BookCard book={book} setDetailedBookHandler={setDetaledBookHandler} />;
-      })}
+    <Box className={`book-list__container`}>
+      <Box className={`book-list`}>
+        {bookList.map((book: IBook) => {
+          return <BookCard key={book.id} book={book} setDetailedBookHandler={setDetaledBookHandler} />;
+        })}
+      </Box>
+      <Button variant="contained" size="large" className="book-list__load">
+        Load More
+      </Button>
     </Box>
   );
   return <>{booksLoading ? <Spinner height="90vh" /> : bookNode}</>;

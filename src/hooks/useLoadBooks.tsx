@@ -11,10 +11,11 @@ const useLoadBooks = () => {
     dispatch(bookActions.setBooksLoading(true));
     try {
       const bookResponse: { data: { items: IBook[]; kind: string; totalItems: number } } = await axios.request({
-        url: `https://www.googleapis.com/books/v1/volumes?q=flowers+inauthor:keyes&key=${apiKey}`,
+        url: `https://www.googleapis.com/books/v1/volumes?q=${'java'}&startIndex=${0}&maxResults=${30}&key=${apiKey}`,
         method: 'GET',
       });
       const { items, kind, totalItems } = bookResponse.data;
+      console.log(items);
       dispatch(bookActions.setBooks(bookResponse.data.items));
     } catch (error) {
       axios.isAxiosError(error) ? alert(error.response?.data || error.message) : console.log(error);

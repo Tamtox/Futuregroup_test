@@ -8,7 +8,6 @@ import '@fontsource/roboto/700.css';
 
 import { Container, createTheme, CssBaseline, StyledEngineProvider, ThemeProvider } from '@mui/material';
 import React, { Suspense, useMemo } from 'react';
-import { Route, Routes } from 'react-router-dom';
 
 const BookList = React.lazy(() => import('@/features/Books/BooksList'));
 const Spinner = React.lazy(() => import('@/components/elements/Spinner/Spinner'));
@@ -84,11 +83,7 @@ function App() {
         <Container maxWidth={false} component="main" className="app">
           <div className="wrapper">
             <Suspense fallback={<Spinner height="100vh" />}>
-              <Routes>
-                {/* <Route path="/" element={<Home />} /> */}
-                {/* <Route path='/auth' element={isLoggedIn ? (verificationStatus === "Complete" ? <Home/> : <Profile/>) : <Auth/>} /> */}
-                <Route path="*" element={<BookList />} />
-              </Routes>
+              <BookList />
             </Suspense>
           </div>
         </Container>
