@@ -10,7 +10,6 @@ import { Container, createTheme, CssBaseline, StyledEngineProvider, ThemeProvide
 import React, { Suspense, useMemo } from 'react';
 import { Route, Routes } from 'react-router-dom';
 
-
 const BookList = React.lazy(() => import('@/features/Books/BooksList'));
 const Spinner = React.lazy(() => import('@/components/elements/Spinner/Spinner'));
 import Toolbar from '@/components/UI/Toolbar/Toolbar';
@@ -79,7 +78,7 @@ function App() {
     <StyledEngineProvider injectFirst>
       <ThemeProvider theme={myTheme}>
         <CssBaseline />
-        <Toolbar/>
+        <Toolbar />
         <Container maxWidth={false} component="main" className="app">
           <div className="wrapper">
             <Suspense fallback={<Spinner height="100vh" />}>

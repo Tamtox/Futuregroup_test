@@ -12,13 +12,11 @@ import store from '@/store/store';
 import App from '@/app';
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
-  <React.StrictMode>
-    <ErrorBoundary fallback={<Error />}>
-      <BrowserRouter>
-        <Provider store={store}>
-          <App />
-        </Provider>
-      </BrowserRouter>
-    </ErrorBoundary>
-  </React.StrictMode>
-  );
+  <ErrorBoundary fallback={<Error />}>
+    <BrowserRouter>
+      <Provider store={store}>
+        <App />
+      </Provider>
+    </BrowserRouter>
+  </ErrorBoundary>,
+);

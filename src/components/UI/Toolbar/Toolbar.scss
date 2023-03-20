@@ -1,3 +1,28 @@
-.toolbar{
-  
+@import '@/styles/mixins';
+
+.toolbar {
+  min-height: 10rem;
+  @include flex;
+  background-color: yellow;
+  padding: 1rem;
+  .toolbar__container {
+    width: calc(min(40rem, 100%));
+    margin: auto;
+    @include flex;
+    flex-direction: column;
+    gap: 1rem;
+    .select {
+      width: 10rem;
+    }
+    .toolbar__title {
+    }
+    .toolbar__search {
+    }
+    .toolbar__filters {
+      width: 100%;
+      @include flex(space-around, center);
+      // background-color: red;
+    }
+    // background-color: red;
+  }
 }
