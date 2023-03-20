@@ -14,9 +14,27 @@ const Toolbar = (): JSX.Element => {
   return (
     <Box className={`toolbar`}>
       <Box className={`toolbar__container`}>
-        <Typography variant="h5" className={`toolbar__title`}>
-          Search for books
-        </Typography>
+        <FormControl className="toolbar__category select" size="small">
+          <InputLabel id="toolbar-category-label">Book Category</InputLabel>
+          <Select
+            labelId="toolbar-category-label"
+            // value={queries.sortQuery}
+            // onChange={(event) => {
+            //   sortQueryHandler(event.target.value);
+            // }}
+            size="small"
+            label="Book Category"
+            defaultValue="all"
+          >
+            <MenuItem value="all">All</MenuItem>
+            <MenuItem value="art">Art</MenuItem>
+            <MenuItem value="biography">Biography</MenuItem>
+            <MenuItem value="computers">Computers</MenuItem>
+            <MenuItem value="history">History</MenuItem>
+            <MenuItem value="medical">Medical</MenuItem>
+            <MenuItem value="poetry">Poetry</MenuItem>
+          </Select>
+        </FormControl>
         <TextField
           className={`toolbar__search`}
           id=""
@@ -26,46 +44,23 @@ const Toolbar = (): JSX.Element => {
           // value={}
           // onChange={}
         />
-        <Box className={`toolbar__filters`}>
-          <FormControl className="toolbar__category select" size="small">
-            <InputLabel id="toolbar-category-label">Book Category</InputLabel>
-            <Select
-              labelId="toolbar-category-label"
-              // value={queries.sortQuery}
-              // onChange={(event) => {
-              //   sortQueryHandler(event.target.value);
-              // }}
-              size="small"
-              label="Book Category"
-              defaultValue="all"
-            >
-              <MenuItem value="all">All</MenuItem>
-              <MenuItem value="art">Art</MenuItem>
-              <MenuItem value="biography">Biography</MenuItem>
-              <MenuItem value="computers">Computers</MenuItem>
-              <MenuItem value="history">History</MenuItem>
-              <MenuItem value="medical">Medical</MenuItem>
-              <MenuItem value="poetry">Poetry</MenuItem>
-            </Select>
-          </FormControl>
-          <FormControl className="toolbar__sort select" size="small">
-            <InputLabel id="toolbar-sort-label">Sort</InputLabel>
-            <Select
-              labelId="toolbar-sort-label"
-              // value={queries.sortQuery}
-              // onChange={(event) => {
-              //   sortQueryHandler(event.target.value);
-              // }}
-              size="small"
-              label="Sort By"
-              defaultValue="relevance"
-            >
-              <MenuItem value="relevance">Relevance</MenuItem>
-              <MenuItem value="dateDesc">Newest</MenuItem>
-              <MenuItem value="dateAsc">Oldest</MenuItem>
-            </Select>
-          </FormControl>
-        </Box>
+        <FormControl className="toolbar__sort select" size="small">
+          <InputLabel id="toolbar-sort-label">Sort</InputLabel>
+          <Select
+            labelId="toolbar-sort-label"
+            // value={queries.sortQuery}
+            // onChange={(event) => {
+            //   sortQueryHandler(event.target.value);
+            // }}
+            size="small"
+            label="Sort By"
+            defaultValue="relevance"
+          >
+            <MenuItem value="relevance">Relevance</MenuItem>
+            <MenuItem value="dateDesc">Newest</MenuItem>
+            <MenuItem value="dateAsc">Oldest</MenuItem>
+          </Select>
+        </FormControl>
       </Box>
     </Box>
   );

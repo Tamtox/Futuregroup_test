@@ -4,28 +4,37 @@
   position: fixed;
   top: 0;
   width: 100vw;
-  min-height: 10rem;
+  height: 5rem;
   @include flex;
-  background-color: yellow;
+  background: #faf9f6;
   padding: 1rem;
+  z-index: 100;
   .toolbar__container {
-    width: calc(min(40rem, 100%));
+    width: calc(min(50rem, 100%));
     margin: auto;
-    @include flex;
-    flex-direction: column;
+    @include grid(1fr, 20% 60% 20%);
+    justify-items: center;
     gap: 1rem;
     .select {
       width: 10rem;
     }
-    .toolbar__title {
+  }
+}
+
+@media (max-width: 700px) {
+  .toolbar {
+    height: 8rem;
+    .toolbar__container {
+      @include grid(1fr 1fr, 1fr 1fr);
+      justify-items: center;
+      gap: 1rem;
+      .toolbar__category {
+      }
+      .toolbar__search {
+        grid-area: 1 / 1 / span 1 / span 2;
+      }
+      .toolbar__sort {
+      }
     }
-    .toolbar__search {
-    }
-    .toolbar__filters {
-      width: 100%;
-      @include flex(space-around, center);
-      // background-color: red;
-    }
-    // background-color: red;
   }
 }

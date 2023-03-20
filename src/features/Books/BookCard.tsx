@@ -5,16 +5,24 @@ import type { IBook } from '@/types/interfaces';
 
 type Props = {
   book: IBook;
+  setDetailedBookHandler: (book: IBook) => void;
 };
 
-const BookCard = ({ book }: Props): JSX.Element => {
+const BookCard = ({ book, setDetailedBookHandler }: Props): JSX.Element => {
   return (
-    <Card className="book-card">
+    <Card className="book-card fade-in-top">
       <Box className={`book-card__image__container`}>
-        <img src="" alt="" className={`book-card__image`} />
+        <img
+          src={`${book.volumeInfo.imageLinks.smallThumbnail}`}
+          alt=""
+          className={`book-card__image`}
+          onClick={() => {
+            setDetailedBookHandler(book);
+          }}
+        />
       </Box>
       <Typography variant="body1" className={`book-card__category`}>
-        {book.volumeInfo.categories.join(',')}
+        {book.volumeInfo.categories?.join(',') || 'No Category'}
       </Typography>
       <Typography variant="body1" className={`book-card__title`}>
         {book.volumeInfo.title}

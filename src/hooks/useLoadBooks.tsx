@@ -15,8 +15,7 @@ const useLoadBooks = () => {
         method: 'GET',
       });
       const { items, kind, totalItems } = bookResponse.data;
-      // dispatch(bookActions.setBooks(bookResponse.data.items));
-      console.log(items);
+      dispatch(bookActions.setBooks(bookResponse.data.items));
     } catch (error) {
       axios.isAxiosError(error) ? alert(error.response?.data || error.message) : console.log(error);
     } finally {

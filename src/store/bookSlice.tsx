@@ -8,8 +8,9 @@ interface IBookState {
   bookList: IBook[];
 }
 
-const initialBookState = {
+const initialBookState: IBookState = {
   booksLoading: false,
+  booksLoaded: false,
   bookList: [],
 };
 
@@ -19,7 +20,7 @@ const bookSlice = createSlice({
   reducers: {
     setBooks: (state, action) => {
       const newBooks: IBook[] = action.payload;
-      state.bookList = state.bookList.concat();
+      state.bookList = newBooks;
     },
     setBooksLoading: (state, action) => {
       state.booksLoading = action.payload;
