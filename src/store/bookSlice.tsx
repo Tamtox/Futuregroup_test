@@ -1,29 +1,30 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice } from '@reduxjs/toolkit';
 
-import { IBook } from "@/types/interfaces";
+import { IBook } from '@/types/interfaces';
 
 interface IBookState {
-  booksLoading: boolean,
-  booksLoaded: boolean,
-  books: IBook[],
+  booksLoading: boolean;
+  booksLoaded: boolean;
+  bookList: IBook[];
 }
 
 const initialBookState = {
   booksLoading: false,
-  booksLoaded: false,
-  books: [],
+  bookList: [],
 };
 
 const bookSlice = createSlice({
-  name: "books",
+  name: 'books',
   initialState: initialBookState,
   reducers: {
     setBooks: (state, action) => {
       const newBooks: IBook[] = action.payload;
-      state.books = state.books.concat();
+      state.bookList = state.bookList.concat();
     },
-  }
-})
+    setBooksLoading: (state, action) => {
+      state.booksLoading = action.payload;
+    },
+  },
+});
 
 export default bookSlice;
-

@@ -13,8 +13,10 @@ import { Route, Routes } from 'react-router-dom';
 const BookList = React.lazy(() => import('@/features/Books/BooksList'));
 const Spinner = React.lazy(() => import('@/components/elements/Spinner/Spinner'));
 import Toolbar from '@/components/UI/Toolbar/Toolbar';
+import useLoadBooks from './hooks/useLoadBooks';
 
 function App() {
+  useLoadBooks();
   const darkMode = false;
   const myTheme = useMemo(
     () =>

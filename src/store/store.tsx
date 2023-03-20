@@ -8,7 +8,7 @@ const store = configureStore({
   },
 });
 
-export const stockActions = bookSlice.actions;
+export const bookActions = bookSlice.actions;
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
 
