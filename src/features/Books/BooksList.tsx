@@ -8,6 +8,7 @@ import Spinner from '@/components/elements/Spinner/Spinner';
 import { IBook, IBookOptions } from '@/types/interfaces';
 import BookCard from './BookCard';
 import DetailedBook from './DetailedBook';
+import Positioner from '@/components/elements/Positioner/Positioner';
 import { Button, Typography } from '@mui/material';
 import useLoadBooks from '@/hooks/useLoadBooks';
 
@@ -48,6 +49,7 @@ const BookList = (): JSX.Element => {
           Load More
         </Button>
       ) : null}
+      {bookOptions.currentPosition >= 30 ? <Positioner /> : null}
     </Box>
   );
   return <>{booksLoading ? <Spinner height="90vh" /> : bookNode}</>;
