@@ -34,7 +34,6 @@ module.exports = {
     'plugin:prettier/recommended',
     'plugin:testing-library/react',
     'plugin:jest-dom/recommended',
-    'plugin:eslint-plugin-simple-import-sort',
   ],
   plugins: ['simple-import-sort', 'prettier'],
   rules: {

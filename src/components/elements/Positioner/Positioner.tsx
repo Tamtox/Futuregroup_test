@@ -10,7 +10,6 @@ const Positioner = () => {
       behavior: 'smooth',
     });
   };
-
   return (
     <Box className="positioner">
       <Fab

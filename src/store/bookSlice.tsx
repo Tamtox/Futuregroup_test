@@ -29,9 +29,13 @@ const bookSlice = createSlice({
   initialState: initialBookState,
   reducers: {
     setBooks: (state, action) => {
-      const { newBooks, kind, bookOptions } = action.payload;
-      state.bookList = state.bookList.concat(newBooks);
+      const { newBooks, bookOptions } = action.payload;
+      state.bookList = newBooks;
       state.bookOptions = bookOptions;
+    },
+    addBooks: (state, action) => {
+      const { newBooks } = action.payload;
+      state.bookList = state.bookList.concat(newBooks);
     },
     setBooksLoading: (state, action) => {
       const isLoading = action.payload.loading;

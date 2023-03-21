@@ -14,13 +14,20 @@ const useLoadBooks = () => {
     startPos: number,
     loadType: string,
   ) => {
+    // Set current search position to 0 on new search
+    if (loadType === 'new') {
+      startPos = 0;
+    }
+    // format search and category queries
+    const searchFilter = searchQuery.trim().split(' ').join('+');
+    const categoryFilter = category !== 'All' ? `+subject:${category}` : '';
     dispatch(bookActions.setBooksLoading({ type: loadType, loading: true }));
     try {
       const bookResponse: { data: { items: IBook[]; kind: string; totalItems: number } } = await axios.request({
-        url: `https://www.googleapis.com/books/v1/volumes?q=${searchQuery}&orderBy=${sortQuery}&startIndex=${startPos}&maxResults=${30}&key=${apiKey}`,
+        url: `https://www.googleapis.com/books/v1/volumes?q=${searchFilter}${categoryFilter}&orderBy=${sortQuery}&startIndex=${startPos}&maxResults=${30}&key=${apiKey}`,
         method: 'GET',
       });
-      const { items, kind, totalItems } = bookResponse.data;
+      const { items, totalItems } = bookResponse.data;
       const bookOptions = {
         totalBooks: totalItems,
         searchQuery,
@@ -28,13 +35,11 @@ const useLoadBooks = () => {
         sortQuery,
         currentPosition: startPos + 30,
       };
-      dispatch(
-        bookActions.setBooks({
-          newBooks: items,
-          kind,
-          bookOptions,
-        }),
-      );
+      if (loadType === 'new') {
+        dispatch(bookActions.setBooks({ newBooks: items, bookOptions }));
+      } else {
+        dispatch(bookActions.addBooks({ newBooks: items }));
+      }
     } catch (error) {
       axios.isAxiosError(error) ? alert(error.response?.data || error.message) : console.log(error);
     } finally {

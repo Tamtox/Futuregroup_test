@@ -1,6 +1,5 @@
 import './BookList.scss';
 
-import { Box } from '@mui/system';
 import { useState } from 'react';
 import type { RootState } from '@/store/store';
 import { useSelector } from 'react-redux';
@@ -9,7 +8,7 @@ import { IBook, IBookOptions } from '@/types/interfaces';
 import BookCard from './BookCard';
 import DetailedBook from './DetailedBook';
 import Positioner from '@/components/elements/Positioner/Positioner';
-import { Button, Typography } from '@mui/material';
+import { Button, Typography, Box } from '@mui/material';
 import useLoadBooks from '@/hooks/useLoadBooks';
 
 const BookList = (): JSX.Element => {
@@ -32,7 +31,7 @@ const BookList = (): JSX.Element => {
       ) : null}
       <Box className={`book-list`}>
         {bookList.map((book: IBook) => {
-          return <BookCard key={book.id} book={book} setDetailedBookHandler={setDetaledBookHandler} />;
+          return <BookCard key={book.id + book.etag} book={book} setDetailedBookHandler={setDetaledBookHandler} />;
         })}
       </Box>
       {bookOptions.currentPosition + 30 <= bookOptions.totalBooks ? (
