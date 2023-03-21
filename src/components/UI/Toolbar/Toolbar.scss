@@ -28,12 +28,8 @@
       @include grid(1fr 1fr, 1fr 1fr);
       justify-items: center;
       gap: 1rem;
-      .toolbar__category {
-      }
       .toolbar__search {
         grid-area: 1 / 1 / span 1 / span 2;
-      }
-      .toolbar__sort {
       }
     }
   }

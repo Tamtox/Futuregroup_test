@@ -102,4 +102,12 @@ const obj = {
 
 type IBook = typeof obj;
 
-export type { IBook };
+interface IBookOptions {
+  totalBooks: number;
+  searchQuery: string;
+  category: string;
+  sortQuery: string;
+  currentPosition: number;
+}
+
+export type { IBook, IBookOptions };

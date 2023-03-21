@@ -19,7 +19,7 @@ const BookCard = ({ book, setDetailedBookHandler }: Props): JSX.Element => {
     >
       <Box className={`book-card__image__container`}>
         <img
-          src={`${book.volumeInfo.imageLinks.smallThumbnail ? book.volumeInfo.imageLinks.smallThumbnail : noimage}`}
+          src={`${book.volumeInfo.imageLinks?.smallThumbnail ? book.volumeInfo.imageLinks.smallThumbnail : noimage}`}
           alt={`${book.volumeInfo.description ? book.volumeInfo.description : ''}`}
           className={`book-card__image`}
         />

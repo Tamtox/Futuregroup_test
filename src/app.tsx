@@ -19,12 +19,6 @@ function App() {
     () =>
       createTheme({
         components: {
-          // MuiTypography: {
-          //   styleOverrides: {
-          //     root: {
-          //     },
-          //   },
-          // },
           MuiCard: {
             styleOverrides: {
               root: {
@@ -46,12 +40,6 @@ function App() {
             default: darkMode ? '#000000' : '#FAF9F6',
             paper: darkMode ? '#100F0F' : '#ffffff',
           },
-          // text: {
-          //   primary: darkMode ? '#ffffff' : '#000000',
-          //   secondary: darkMode ? '#ffffff' : '#000000',
-          //   disabled: darkMode ? '#ffffff' : '#000000',
-          //   // hint: darkMode ? '#ffffff' : '#000000',
-          // },
           primary: {
             main: darkMode ? '#B1B2FF' : '#51499f',
             light: '#EBC7E8',
@@ -64,11 +52,6 @@ function App() {
             dark: '#7b1fa2',
             contrastText: '#fff',
           },
-          // error: {},
-          // warning: {},
-          // info: {},
-          // success: {},
-          // divider: 'yellow',
         },
       }),
     [darkMode],

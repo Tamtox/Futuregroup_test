@@ -1,19 +1,13 @@
 import './Toolbar.scss';
 
-import React, { useReducer } from 'react';
-import {
-  Box,
-  Typography,
-  TextField,
-  FormControl,
-  InputLabel,
-  Select,
-  MenuItem,
-  InputAdornment,
-  IconButton,
-} from '@mui/material';
+import { useSelector } from 'react-redux';
+import { useReducer } from 'react';
+import { Box, TextField, FormControl, InputLabel, Select, MenuItem, InputAdornment, IconButton } from '@mui/material';
 import { FaSearch } from 'react-icons/fa';
+import type { RootState } from '@/store/store';
 import useLoadBooks from '@/hooks/useLoadBooks';
+
+import type { IBookOptions } from '@/types/interfaces';
 
 interface ToolbarState {
   searchQuery: string;
@@ -22,13 +16,14 @@ interface ToolbarState {
 }
 
 const Toolbar = (): JSX.Element => {
-  useLoadBooks();
+  const { loadBooks } = useLoadBooks();
+  const bookOptions = useSelector<RootState, IBookOptions>((state) => state.bookSlice.bookOptions);
   const [state, setState] = useReducer(
     (state: ToolbarState, action: Partial<ToolbarState>) => ({ ...state, ...action }),
     {
       searchQuery: '',
-      category: '',
-      sortQuery: '',
+      category: 'all',
+      sortQuery: 'relevance',
     },
   );
   const bookInputsHandler = async (inputType: string, newVal: string) => {
@@ -74,7 +69,8 @@ const Toolbar = (): JSX.Element => {
                 <IconButton
                   color="inherit"
                   onClick={() => {
-                    console.log(123);
+                    const { searchQuery, category, sortQuery } = state;
+                    loadBooks(searchQuery, category, sortQuery, bookOptions.currentPosition, 'new');
                   }}
                 >
                   <FaSearch />
@@ -96,8 +92,7 @@ const Toolbar = (): JSX.Element => {
             defaultValue="relevance"
           >
             <MenuItem value="relevance">Relevance</MenuItem>
-            <MenuItem value="dateDesc">Newest</MenuItem>
-            <MenuItem value="dateAsc">Oldest</MenuItem>
+            <MenuItem value="newest">Newest</MenuItem>
           </Select>
         </FormControl>
       </Box>

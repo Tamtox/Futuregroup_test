@@ -26,12 +26,6 @@
       @include flex(flex-start, flex-start);
       flex-direction: column;
       gap: 1rem;
-      .book-card__text__element {
-      }
-      .book-card__category {
-      }
-      .book-card__title {
-      }
       .book-card__author {
         color: gray;
         text-decoration: underline;

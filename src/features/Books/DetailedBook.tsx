@@ -2,8 +2,6 @@ import './DetailedBook.scss';
 
 import { Box, Button, Typography } from '@mui/material';
 import type { IBook } from '@/types/interfaces';
-import type { RootState } from '@/store/store';
-import { useSelector } from 'react-redux';
 import noimage from '@/assets/No-Image.png';
 
 type DetailedBookProps = {
@@ -12,13 +10,12 @@ type DetailedBookProps = {
 };
 
 const DetailedBook = ({ book, setDetailedBookHandler }: DetailedBookProps): JSX.Element => {
-  const booksLoading = useSelector((state: RootState) => state.bookSlice.booksLoading);
   return (
     <Box className="detailed-book__container">
       <Box className="detailed-book">
         <Box className={`detailed-book__image__container`}>
           <img
-            src={`${book.volumeInfo.imageLinks.thumbnail ? book.volumeInfo.imageLinks.thumbnail : noimage}`}
+            src={`${book.volumeInfo.imageLinks?.thumbnail ? book.volumeInfo.imageLinks.thumbnail : noimage}`}
             alt={`${book.volumeInfo.description ? book.volumeInfo.description : ''}`}
             className={`detailed-book__image`}
           />
@@ -33,9 +30,11 @@ const DetailedBook = ({ book, setDetailedBookHandler }: DetailedBookProps): JSX.
           <Typography variant="body1" className={`book-card__author book-card__text__element`}>
             {book.volumeInfo.authors ? book.volumeInfo.authors?.join(',') : ''}
           </Typography>
-          <Typography variant="body1" className={`book-card__description book-card__text__element`}>
-            {book.volumeInfo.description ? book.volumeInfo.description : ''}
-          </Typography>
+          {book.volumeInfo.description ? (
+            <Typography variant="body1" className={`book-card__description book-card__text__element`}>
+              {book.volumeInfo.description}
+            </Typography>
+          ) : null}
         </Box>
       </Box>
       <Button
