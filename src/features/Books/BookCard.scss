@@ -6,6 +6,8 @@
   grid-template: 60% 40% / 100%;
   padding: 0.2rem 1rem 0.2rem 1rem;
   gap: 1rem;
+  cursor: pointer;
+  transition: transform 0.3s, box-shadow 0.3s;
   .book-card__image__container {
     @include widthAndHeight(100%, 100%);
     @include flex;
@@ -14,12 +16,6 @@
       height: 300px;
       object-fit: cover;
       box-shadow: 1px 3px 5px black;
-      transition: transform 0.3s, box-shadow 0.3s;
-      cursor: pointer;
-    }
-    .book-card__image:hover {
-      transform: scale(1.05);
-      box-shadow: 1px 3px 15px black;
     }
   }
   .book-card__info-container {
@@ -44,4 +40,9 @@
       text-overflow: ellipsis;
     }
   }
+}
+
+.book-card:hover {
+  transform: scale(1.05);
+  box-shadow: 1px 3px 15px black;
 }

@@ -11,7 +11,7 @@ const useLoadBooks = () => {
     dispatch(bookActions.setBooksLoading(true));
     try {
       const bookResponse: { data: { items: IBook[]; kind: string; totalItems: number } } = await axios.request({
-        url: `https://www.googleapis.com/books/v1/volumes?q=${'java'}&startIndex=${0}&maxResults=${30}&key=${apiKey}`,
+        url: `https://www.googleapis.com/books/v1/volumes?q=${'java'}}&maxResults=${30}&key=${apiKey}`,
         method: 'GET',
       });
       const { items, kind, totalItems } = bookResponse.data;

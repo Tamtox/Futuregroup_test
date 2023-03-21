@@ -13,15 +13,27 @@ import {
   IconButton,
 } from '@mui/material';
 import { FaSearch } from 'react-icons/fa';
+import useLoadBooks from '@/hooks/useLoadBooks';
 
-interface ToolbarState {}
+interface ToolbarState {
+  searchQuery: string;
+  category: string;
+  sortQuery: string;
+}
 
 const Toolbar = (): JSX.Element => {
+  useLoadBooks();
   const [state, setState] = useReducer(
     (state: ToolbarState, action: Partial<ToolbarState>) => ({ ...state, ...action }),
-    {},
+    {
+      searchQuery: '',
+      category: '',
+      sortQuery: '',
+    },
   );
-  const bookSearchHandler = async (searchQuery: string, category: string) => {};
+  const bookInputsHandler = async (inputType: string, newVal: string) => {
+    setState({ [inputType]: newVal });
+  };
   return (
     <Box className={`toolbar`}>
       <Box className={`toolbar__container`}>
@@ -29,10 +41,10 @@ const Toolbar = (): JSX.Element => {
           <InputLabel id="toolbar-category-label">Book Category</InputLabel>
           <Select
             labelId="toolbar-category-label"
-            // value={queries.sortQuery}
-            // onChange={(event) => {
-            //   sortQueryHandler(event.target.value);
-            // }}
+            value={state.category}
+            onChange={(e: any) => {
+              bookInputsHandler('category', e.target.value);
+            }}
             size="small"
             label="Book Category"
             defaultValue="all"
@@ -52,8 +64,10 @@ const Toolbar = (): JSX.Element => {
           label="Book title"
           size="small"
           fullWidth
-          // value={}
-          // onChange={}
+          value={state.searchQuery}
+          onChange={(e: any) => {
+            bookInputsHandler('searchQuery', e.target.value);
+          }}
           InputProps={{
             endAdornment: (
               <InputAdornment position="end">
@@ -73,10 +87,10 @@ const Toolbar = (): JSX.Element => {
           <InputLabel id="toolbar-sort-label">Sort</InputLabel>
           <Select
             labelId="toolbar-sort-label"
-            // value={queries.sortQuery}
-            // onChange={(event) => {
-            //   sortQueryHandler(event.target.value);
-            // }}
+            value={state.sortQuery}
+            onChange={(e: any) => {
+              bookInputsHandler('sortQuery', e.target.value);
+            }}
             size="small"
             label="Sort By"
             defaultValue="relevance"

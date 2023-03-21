@@ -15,11 +15,11 @@ const BookList = (): JSX.Element => {
   const bookList = useSelector<RootState, IBook[]>((state) => state.bookSlice.bookList);
   const [detailedBook, setDetailedBook] = useState<IBook | null>(null);
   // Switch to detailed mode
-  const setDetaledBookHandler = (book: IBook) => {
+  const setDetaledBookHandler = (book: IBook | null) => {
     setDetailedBook(book);
   };
   const bookNode = detailedBook ? (
-    <DetailedBook />
+    <DetailedBook book={detailedBook} setDetailedBookHandler={setDetaledBookHandler} />
   ) : (
     <Box className={`book-list__container`}>
       <Box className={`book-list`}>
