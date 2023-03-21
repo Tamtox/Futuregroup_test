@@ -18,8 +18,8 @@ const initialBookState: IBookState = {
   bookOptions: {
     totalBooks: 0,
     searchQuery: '',
-    category: 'all',
-    sortQuery: 'relevance',
+    category: 'All',
+    sortQuery: 'Relevance',
     currentPosition: 0,
   },
 };
@@ -29,13 +29,9 @@ const bookSlice = createSlice({
   initialState: initialBookState,
   reducers: {
     setBooks: (state, action) => {
-      const { newBooks, bookOptions } = action.payload;
-      state.bookList = newBooks;
+      const { newBooks, bookOptions, loadType } = action.payload;
+      loadType === 'new' ? (state.bookList = newBooks) : (state.bookList = state.bookList.concat(newBooks));
       state.bookOptions = bookOptions;
-    },
-    addBooks: (state, action) => {
-      const { newBooks } = action.payload;
-      state.bookList = state.bookList.concat(newBooks);
     },
     setBooksLoading: (state, action) => {
       const isLoading = action.payload.loading;

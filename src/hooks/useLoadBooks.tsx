@@ -35,11 +35,7 @@ const useLoadBooks = () => {
         sortQuery,
         currentPosition: startPos + 30,
       };
-      if (loadType === 'new') {
-        dispatch(bookActions.setBooks({ newBooks: items, bookOptions }));
-      } else {
-        dispatch(bookActions.addBooks({ newBooks: items }));
-      }
+      dispatch(bookActions.setBooks({ newBooks: items, bookOptions, loadType }));
     } catch (error) {
       axios.isAxiosError(error) ? alert(error.response?.data || error.message) : console.log(error);
     } finally {
