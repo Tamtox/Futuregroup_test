@@ -7,55 +7,42 @@ import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
 
 import { Container, createTheme, CssBaseline, StyledEngineProvider, ThemeProvider } from '@mui/material';
-import React, { Suspense, useMemo } from 'react';
+import React from 'react';
 
 const BookList = React.lazy(() => import('@/features/Books/BooksList'));
-const Spinner = React.lazy(() => import('@/components/elements/Spinner/Spinner'));
 import Toolbar from '@/components/UI/Toolbar/Toolbar';
 
 function App() {
-  const darkMode = false;
-  const myTheme = useMemo(
-    () =>
-      createTheme({
-        components: {
-          MuiCard: {
-            styleOverrides: {
-              root: {
-                boxShadow: `0px 1px 3px ${'#000000'}`,
-              },
-            },
-          },
-          MuiButton: {
-            styleOverrides: {
-              root: {
-                textTransform: 'none',
-              },
-            },
+  const myTheme = createTheme({
+    components: {
+      MuiCard: {
+        styleOverrides: {
+          root: {
+            boxShadow: `0px 1px 3px ${'#000000'}`,
           },
         },
-        palette: {
-          mode: darkMode ? 'dark' : 'light',
-          background: {
-            default: darkMode ? '#000000' : '#FAF9F6',
-            paper: darkMode ? '#100F0F' : '#ffffff',
-          },
-          primary: {
-            main: darkMode ? '#B1B2FF' : '#51499f',
-            light: '#EBC7E8',
-            dark: '#1C3879',
-            contrastText: '#fff',
-          },
-          secondary: {
-            main: '#ffffff',
-            light: '#ba68c8',
-            dark: '#7b1fa2',
-            contrastText: '#fff',
+      },
+      MuiButton: {
+        styleOverrides: {
+          root: {
+            textTransform: 'none',
           },
         },
-      }),
-    [darkMode],
-  );
+      },
+    },
+    palette: {
+      background: {
+        default: '#FAF9F6',
+        paper: '#ffffff',
+      },
+      primary: {
+        main: '#51499f',
+        light: '#EBC7E8',
+        dark: '#1C3879',
+        contrastText: '#fff',
+      },
+    },
+  });
   return (
     <StyledEngineProvider injectFirst>
       <ThemeProvider theme={myTheme}>
@@ -63,9 +50,7 @@ function App() {
         <Toolbar />
         <Container maxWidth={false} component="main" className="app">
           <div className="wrapper">
-            <Suspense fallback={<Spinner height="100vh" />}>
-              <BookList />
-            </Suspense>
+            <BookList />
           </div>
         </Container>
       </ThemeProvider>

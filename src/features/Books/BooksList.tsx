@@ -41,16 +41,14 @@ const BookList = (): JSX.Element => {
   }, [state.currentScrollPosition]);
   // Switch to detailed mode
   const setDetaledBookHandler = (book: IBook | null) => {
-    if (book === null) {
-      setTimeout(() => {
-        window.scrollTo({
-          top: state.memorizedScrollPosition,
-          behavior: 'smooth',
-        });
-      }, 10);
-    } else {
+    if (book !== null) {
       setState({ memorizedScrollPosition: state.currentScrollPosition });
     }
+    setTimeout(() => {
+      window.scrollTo({
+        top: book === null ? state.memorizedScrollPosition : 0,
+      });
+    }, 10);
     setState({ detailedBook: book });
   };
   // Book node
@@ -58,9 +56,7 @@ const BookList = (): JSX.Element => {
     <DetailedBook book={state.detailedBook} setDetailedBookHandler={setDetaledBookHandler} />
   ) : (
     <Box className={`book-list__container`}>
-      {bookOptions.totalBooks ? (
-        <Typography variant="h5">{`Total books found:${bookOptions.totalBooks}`}</Typography>
-      ) : null}
+      {bookOptions.totalBooks ? <Typography variant="h5">{`Books found: ${bookOptions.totalBooks}`}</Typography> : null}
       <Box className={`book-list`}>
         {bookList.map((book: IBook) => {
           return <BookCard key={book.id + book.etag} book={book} setDetailedBookHandler={setDetaledBookHandler} />;

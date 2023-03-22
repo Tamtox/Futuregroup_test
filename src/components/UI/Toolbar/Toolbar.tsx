@@ -2,17 +2,7 @@ import './Toolbar.scss';
 
 import { useSelector } from 'react-redux';
 import { useReducer } from 'react';
-import {
-  Box,
-  TextField,
-  FormControl,
-  InputLabel,
-  Select,
-  MenuItem,
-  InputAdornment,
-  IconButton,
-  Alert,
-} from '@mui/material';
+import { Box, TextField, FormControl, InputLabel, Select, MenuItem, InputAdornment, IconButton } from '@mui/material';
 import { FaSearch } from 'react-icons/fa';
 import type { RootState } from '@/store/store';
 import useLoadBooks from '@/hooks/useLoadBooks';

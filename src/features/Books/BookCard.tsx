@@ -19,20 +19,20 @@ const BookCard = ({ book, setDetailedBookHandler }: Props): JSX.Element => {
     >
       <Box className={`book-card__image__container`}>
         <img
-          src={`${book.volumeInfo.imageLinks?.smallThumbnail ? book.volumeInfo.imageLinks.smallThumbnail : noimage}`}
-          alt={`${book.volumeInfo.description ? book.volumeInfo.description : ''}`}
+          src={`${book.volumeInfo?.imageLinks?.smallThumbnail ? book.volumeInfo.imageLinks.smallThumbnail : noimage}`}
+          alt={`${book.volumeInfo?.description ? book.volumeInfo.description : ''}`}
           className={`book-card__image`}
         />
       </Box>
       <Box className={`book-card__info-container`}>
         <Typography variant="body1" className={`book-card__category book-card__text__element`}>
-          {book.volumeInfo.categories ? book.volumeInfo.categories[0] : ''}
+          {book.volumeInfo?.categories ? book.volumeInfo.categories[0] : ''}
         </Typography>
         <Typography variant="body1" className={`book-card__title book-card__text__element`}>
-          {book.volumeInfo.title ? book.volumeInfo.title : ''}
+          {book.volumeInfo?.title ? book.volumeInfo.title : ''}
         </Typography>
         <Typography variant="body1" className={`book-card__author book-card__text__element`}>
-          {book.volumeInfo.authors ? book.volumeInfo.authors?.join(',') : ''}
+          {book.volumeInfo?.authors ? book.volumeInfo.authors?.join(',') : ''}
         </Typography>
       </Box>
     </Card>
