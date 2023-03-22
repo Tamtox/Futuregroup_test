@@ -1,6 +1,6 @@
 import './BookList.scss';
 
-import { useState } from 'react';
+import { useEffect, useReducer } from 'react';
 import type { RootState } from '@/store/store';
 import { useSelector } from 'react-redux';
 import Spinner from '@/components/elements/Spinner/Spinner';
@@ -11,19 +11,51 @@ import Positioner from '@/components/elements/Positioner/Positioner';
 import { Button, Typography, Box } from '@mui/material';
 import useLoadBooks from '@/hooks/useLoadBooks';
 
+interface IBookListState {
+  detailedBook: IBook | null;
+  currentScrollPosition: number;
+  memorizedScrollPosition: number;
+}
+
 const BookList = (): JSX.Element => {
   const booksLoading = useSelector<RootState, boolean>((state) => state.bookSlice.booksLoading);
   const booksAppendLoading = useSelector<RootState, boolean>((state) => state.bookSlice.booksAppendLoading);
   const bookList = useSelector<RootState, IBook[]>((state) => state.bookSlice.bookList);
   const bookOptions = useSelector<RootState, IBookOptions>((state) => state.bookSlice.bookOptions);
   const { loadBooks } = useLoadBooks();
-  const [detailedBook, setDetailedBook] = useState<IBook | null>(null);
+  const [state, setState] = useReducer(
+    (state: IBookListState, action: Partial<IBookListState>) => ({ ...state, ...action }),
+    {
+      detailedBook: null,
+      currentScrollPosition: 0,
+      memorizedScrollPosition: 0,
+    },
+  );
+  // Maintain scroll postion after leaving detailed view
+  const onScroll = (e: any) => {
+    setState({ currentScrollPosition: e.target.documentElement.scrollTop });
+  };
+  useEffect(() => {
+    window.addEventListener('scroll', onScroll);
+    return () => window.removeEventListener('scroll', onScroll);
+  }, [state.currentScrollPosition]);
   // Switch to detailed mode
   const setDetaledBookHandler = (book: IBook | null) => {
-    setDetailedBook(book);
+    if (book === null) {
+      setTimeout(() => {
+        window.scrollTo({
+          top: state.memorizedScrollPosition,
+          behavior: 'smooth',
+        });
+      }, 10);
+    } else {
+      setState({ memorizedScrollPosition: state.currentScrollPosition });
+    }
+    setState({ detailedBook: book });
   };
-  const bookNode = detailedBook ? (
-    <DetailedBook book={detailedBook} setDetailedBookHandler={setDetaledBookHandler} />
+  // Book node
+  const bookNode = state.detailedBook ? (
+    <DetailedBook book={state.detailedBook} setDetailedBookHandler={setDetaledBookHandler} />
   ) : (
     <Box className={`book-list__container`}>
       {bookOptions.totalBooks ? (
